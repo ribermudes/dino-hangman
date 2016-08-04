@@ -1,12 +1,13 @@
-function Hangman(){
-
+function Hangman(dinoChars){
+  this.dinoChars = dinoChars;
 }
 
 Hangman.prototype.getDinoWord = function() {
   $.get("http://dinoipsum.herokuapp.com/api/?format=json").then(function(response) {
     response.forEach(function(name){
       var dinoName = name[0];
-      $('.showDinoWord').text(dinoName);
+      var dinoChars = dinoName.toUpperCase().split('');
+      $(".showDinoWord").text(dinoChars);
       }).fail(function(error){
       $('.showDinoWord').text(error.responseJSON.message);
       });
